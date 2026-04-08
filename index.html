@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLASSIFIED TRACE</title>
+    <style>
+        body { 
+            background-color: #050505; 
+            color: #ff003c; 
+            font-family: 'Courier New', Courier, monospace; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            margin: 0; 
+            overflow: hidden; 
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h1 { 
+            font-size: 1.8rem; 
+            text-align: center; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            animation: glitch 3s linear infinite; 
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            color: #aaaaaa;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+        #timer { 
+            font-size: 3rem; 
+            margin: 20px 0; 
+            font-weight: bold; 
+            letter-spacing: 3px; 
+            color: #ffffff; 
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+        }
+        .hint-box {
+            background-color: rgba(255, 0, 60, 0.1);
+            border: 1px solid #ff003c;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #hint-text { 
+            font-size: 1.1rem; 
+            color: #eeeeee; 
+            line-height: 1.5;
+        }
+        .scan-again {
+            font-size: 0.9rem;
+            color: #ff003c;
+            margin-top: 15px;
+            font-weight: bold;
+            animation: blinker 1.5s linear infinite;
+        }
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
+        }
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+        /* Mobile responsiveness */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.4rem; }
+            #timer { font-size: 2.2rem; }
+            #hint-text { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Threat Level: Critical</h1>
+    <div class="subtitle">System Breach Detected</div>
+    
+    <div id="timer">00:00:00:00</div>
+    
+    <div class="hint-box">
+        <div id="hint-text">Loading trace data...</div>
+        <div class="scan-again" id="scan-instruction"></div>
+    </div>
+
+    <script>
+        // Set this to the EXACT time of the Nukkad Natak (April 17, 2026, 12:00)
+        var countDownDate = new Date("Apr 17, 2026 12:00:00").getTime();
+
+        // Automated Hint Logic based on current date
+        function updateHint() {
+            var currentDate = new Date().getDate(); // Gets the day of the month (e.g., 9, 11, 13)
+            var hintElement = document.getElementById("hint-text");
+            var scanElement = document.getElementById("scan-instruction");
+
+            if (currentDate <= 10) {
+                // April 9 & 10
+                hintElement.innerHTML = "You eat me, you drink me, but you can't see me. I am already inside.";
+                scanElement.innerHTML = ">>> SIGNAL LOST. SCAN AGAIN IN 48 HOURS FOR NEXT CLUE. <<<";
+            } else if (currentDate <= 12) {
+                // April 11 & 12
+                hintElement.innerHTML = "Your daily chai and canteen snacks are my Trojan horse. You let me in willingly.";
+                scanElement.innerHTML = ">>> TRACING SOURCE... SCAN AGAIN IN 48 HOURS. <<<";
+            } else if (currentDate <= 14) {
+                // April 13 & 14
+                hintElement.innerHTML = "The campus is infected. I am in your bloodstream. I am in your cells.";
+                scanElement.innerHTML = ">>> CONFRONTATION IMMINENT. SCAN AGAIN IN 48 HOURS. <<<";
+            } else {
+                // April 15 onwards
+                hintElement.innerHTML = "The silent killer reveals itself. The Biotech Club will expose the truth.";
+                scanElement.innerHTML = ">>> FINAL TRACE ACTIVE. PREPARE YOURSELVES. <<<";
+            }
+        }
+
+        // Run the hint update function immediately
+        updateHint();
+
+        // Timer Logic
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML =
+                (days < 10 ? "0" + days : days) + "d : " +
+                (hours < 10 ? "0" + hours : hours) + "h : " +
+                (minutes < 10 ? "0" + minutes : minutes) + "m : " +
+                (seconds < 10 ? "0" + seconds : seconds) + "s";
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("timer").innerHTML = "00:00:00:00";
+                document.getElementById("hint-text").innerHTML = "THE THREAT IS HERE. PROCEED TO THE HOTSPOT.";
+                document.getElementById("scan-instruction").innerHTML = ">>> SYSTEM OVERRIDE <<<";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
